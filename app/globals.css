@@ -144,6 +144,15 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -204,17 +213,29 @@
     font-weight: 700;
   }
   .typo-heading-sm {
-    font-size: 1.125rem; /* 18px */
+    font-size: 1rem; /* 18px */
     line-height: 1.4;
     font-weight: 700;
   }
 
   /* Body — Inter */
   .typo-body-xl {
-    font-size: 2.75rem; /* 44px */
-    line-height: 1.15;
+    font-size: 1.5rem; /* 24px mobile */
+    line-height: 1.2;
     font-weight: 700;
     letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 1024px) {
+    .typo-body-xl {
+      font-size: 2.75rem; /* 44px desktop */
+      line-height: 1.15;
+    }
+    .typo-heading-sm {
+      font-size: 1.125rem; /* 18px */
+      line-height: 1.4;
+      font-weight: 700;
+    }
   }
 
   .typo-body-lg {

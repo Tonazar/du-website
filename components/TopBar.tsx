@@ -3,20 +3,20 @@
 import { useState } from "react"
 import { Search } from "lucide-react"
 
-const TopBar = () => {
+const TopBar = ({ menuActive = false }: { menuActive?: boolean }) => {
   const [activeTab, setActiveTab] = useState<"personal" | "business">(
     "personal"
   )
 
   return (
-    <div className="w-full bg-[linear-gradient(315deg,#753BBD_0%,#00A9CE_67.21%,#00A9CE_100%)]">
+    <div className={`hidden w-full transition-colors lg:block ${menuActive ? "bg-foreground" : "bg-[linear-gradient(315deg,#753BBD_0%,#00A9CE_67.21%,#00A9CE_100%)]"}`}>
       <div className="container mx-auto flex h-10 items-center justify-between text-sm text-white lg:px-20">
         <div className="flex items-center gap-0">
           <button
             onClick={() => setActiveTab("personal")}
             className={`h-full px-5 py-2 font-medium transition-colors ${
               activeTab === "personal"
-                ? "bg-[#008CAB]"
+                ? menuActive ? "bg-black" : "bg-[#008CAB]"
                 : "text-white/70 hover:text-white"
             }`}
           >
@@ -26,7 +26,7 @@ const TopBar = () => {
             onClick={() => setActiveTab("business")}
             className={`h-full px-5 py-2 font-medium transition-colors ${
               activeTab === "business"
-                ? "bg-[#008CAB]"
+                ? menuActive ? "bg-black" : "bg-[#008CAB]"
                 : "text-white/70 hover:text-white"
             }`}
           >
