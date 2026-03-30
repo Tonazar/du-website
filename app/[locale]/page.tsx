@@ -1,3 +1,6 @@
+"use client"
+
+import { useTranslations, useLocale } from "next-intl"
 import BannerSlider from "@/components/BannerSlider"
 import Container from "@/components/Container"
 import Header from "@/components/Header"
@@ -34,6 +37,8 @@ import ReviewCard from "@/components/ReviewCard"
 import Footer from "@/components/Footer"
 
 export default function Page() {
+  const t = useTranslations()
+  const locale = useLocale()
   return (
     <div>
       <Header />
@@ -45,35 +50,48 @@ export default function Page() {
         <div className="flex flex-col gap-20 py-8 sm:py-20">
           <SectionCard>
             <div className="flex flex-col items-center gap-6">
-              <h4 className="typo-heading-md">
-                Shop our products and services
-              </h4>
+              <h4 className="typo-heading-md">{t("shop.title")}</h4>
               <div className="grid w-full grid-cols-2 gap-4 sm:grid-cols-3 lg:flex lg:items-baseline lg:justify-around">
-                <Prodcuts icon="Modern.png" title="Devices" href="https://shop.du.ae/en/personal/c-mobile-phones#category=mobile-phones&brands=all&features=inStockFlag" />
-                <Prodcuts icon="Postpaid.png" title="Postpaid" href="https://shop.du.ae/en/personal/s-du-postpaid-plans?contract=medium&minutes=flexible&planType=all&view=splash" />
-                <Prodcuts icon="Internet.png" title="TV/internet" />
-                <Prodcuts icon="Wifi.png" title="Home wireless" />
-                <Prodcuts icon="Prepaid.png" title="Prepaid" href="https://shop.du.ae/en/personal/s-du-prepaid-flexi-plans" />
-                <Prodcuts icon="Wallet.png" title="Financial services" />
+                <Prodcuts
+                  icon="Modern.png"
+                  title={t("shop.devices")}
+                  href="https://shop.du.ae/en/personal/c-mobile-phones#category=mobile-phones&brands=all&features=inStockFlag"
+                />
+                <Prodcuts
+                  icon="Postpaid.png"
+                  title={t("shop.postpaid")}
+                  href="https://shop.du.ae/en/personal/s-du-postpaid-plans?contract=medium&minutes=flexible&planType=all&view=splash"
+                />
+                <Prodcuts icon="Internet.png" title={t("shop.tvInternet")} />
+                <Prodcuts icon="Wifi.png" title={t("shop.homeWireless")} />
+                <Prodcuts
+                  icon="Prepaid.png"
+                  title={t("shop.prepaid")}
+                  href="https://shop.du.ae/en/personal/s-du-prepaid-flexi-plans"
+                />
+                <Prodcuts
+                  icon="Wallet.png"
+                  title={t("shop.financialServices")}
+                />
               </div>
             </div>
           </SectionCard>
           <div className="grid w-full grid-cols-2 gap-4 lg:flex lg:justify-around">
             <div className="flex gap-2">
               <Van />
-              Free delivery
+              {t("shop.freeDelivery")}
             </div>
             <div className="flex gap-2">
               <CreditCard />
-              No downpayment
+              {t("shop.noDownpayment")}
             </div>
             <div className="flex gap-2">
               <Tag />
-              0% Interest
+              {t("shop.zeroInterest")}
             </div>
             <div className="flex gap-2">
               <BookUser />
-              Pick your number
+              {t("shop.pickYourNumber")}
             </div>
           </div>
         </div>
@@ -160,77 +178,184 @@ export default function Page() {
           </div>
         </div>
         <div className="flex justify-center">
-          <Link href="https://shop.du.ae/en/personal/c-mobile-phones#category=mobile-phones&brands=all&features=inStockFlag" target="_blank">
+          <Link
+            href="https://shop.du.ae/en/personal/c-mobile-phones#category=mobile-phones&brands=all&features=inStockFlag"
+            target="_blank"
+          >
             <PrimaryButton className="bg-primary px-4 py-2 text-white">
-              See all devices
+              {t("common.seeAllDevices")}
             </PrimaryButton>
           </Link>
         </div>
 
         {/* Offers */}
 
-        <h4 className="typo-heading-sm mt-12 text-center">Our best offers</h4>
+        <h4 className="typo-heading-sm mt-12 text-center">
+          {t("offers.title")}
+        </h4>
 
         <div className="my-12 grid grid-cols-2 gap-4 lg:flex lg:justify-between">
-          <div className="w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg">
+          {/* Offer 1 - du Pay */}
+          <Link
+            href="https://dupay.ae/en"
+            target="_blank"
+            className="relative w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg"
+          >
             <Image
-              src="/images/offers1.png"
+              src="/images/offers1.jpg"
               alt="du offers"
               width={300}
               height={400}
             />
-          </div>
-          <div className="w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg">
+            <div className="absolute inset-0 flex flex-col gap-3 p-4">
+              <span className="w-fit rounded-full border border-white bg-[linear-gradient(12deg,var(--accent),var(--primary),var(--secondary))] px-5 py-2.5 text-sm font-bold text-white">
+                {t("offers.offer1Badge")}
+              </span>
+              <p className="typo-heading-sm font-bold text-white">
+                {t("offers.offer1Title")}
+              </p>
+              <p className="typo-caption text-white/60">
+                {t("offers.offer1Footer")}
+              </p>
+            </div>
+          </Link>
+
+          {/* Offer 2 - Power Plans */}
+          <Link
+            href="https://shop.du.ae/en/personal/s-du-postpaid-plans?contract=medium&minutes=flexible&planType=all&view=splash"
+            target="_blank"
+            className="relative w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg"
+          >
             <Image
-              src="/images/offers2.png"
+              src="/images/offers2.jpg"
               alt="du offers"
               width={300}
               height={400}
             />
-          </div>
-          <div className="w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg">
+            <div className="absolute inset-0 flex flex-col gap-3 p-4">
+              <span className="w-fit rounded-full border border-white bg-[linear-gradient(12deg,var(--accent),var(--primary),var(--secondary))] px-5 py-2.5 text-sm font-bold text-white">
+                {t("offers.offer2Badge")}
+              </span>
+              <p className="typo-heading-sm font-bold text-white">
+                {t("offers.offer2Title")}
+              </p>
+            </div>
+          </Link>
+
+          {/* Offer 3 - Home Wireless */}
+          <div className="relative w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg">
             <Image
-              src="/images/offers3.png"
+              src="/images/offers3.jpg"
               alt="du offers"
               width={300}
               height={400}
             />
+            <div className="absolute inset-0 flex flex-col gap-3 p-4">
+              <span className="w-fit rounded-full border border-white bg-[linear-gradient(12deg,var(--accent),var(--primary),var(--secondary))] px-5 py-2.5 text-sm font-bold text-white">
+                {t("offers.offer3Badge")}
+              </span>
+              <p className="typo-heading-sm font-bold text-white">
+                {t("offers.offer3Title")}
+              </p>
+            </div>
           </div>
-          <div className="w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg">
+
+          {/* Offer 4 - Prepaid Flexi */}
+          <Link
+            href="https://shop.du.ae/en/personal/s-du-prepaid-flexi-plans"
+            target="_blank"
+            className="relative w-fit max-w-[300px] cursor-pointer overflow-hidden rounded-xl transition-all duration-300 hover:translate-y-[-10px] hover:shadow-lg"
+          >
             <Image
-              src="/images/offers4.png"
+              src="/images/offers4.jpg"
               alt="du offers"
               width={300}
               height={400}
             />
-          </div>
+            <div className="absolute inset-0 flex flex-col gap-3 p-4">
+              <span className="w-fit rounded-full border border-white bg-[linear-gradient(12deg,var(--accent),var(--primary),var(--secondary))] px-5 py-2.5 text-sm font-bold text-white">
+                {t("offers.offer4Badge")}
+              </span>
+              <p className="typo-heading-sm font-bold text-white">
+                {t("offers.offer4Title")}
+              </p>
+            </div>
+          </Link>
         </div>
 
         {/* Call back */}
         <div className="mx-auto flex w-fit flex-col items-center gap-4 rounded-xl bg-white px-6 py-4 sm:flex-row sm:gap-6">
           <div className="flex items-center gap-2">
             <MessageCircleQuestionMark />
-            <p>Questions about our plans? We're here to help!</p>
+            <p>{t("offers.questionsAboutPlans")}</p>
           </div>
-          <PrimaryButton>Call me back</PrimaryButton>
+          <Link
+            href="https://shop.du.ae/en/personal/postpaid/du-telesales?_gl=1*il3zxo*_gcl_au*NTM5NDk4NjY4LjE3NzMwNDAxMDU.*_ga*ODExNjg0OTg3LjE3NDcwNDc1OTM.*_ga_PSF2QWHVDC*czE3NzQ4NTc0NzQkbzUzJGcxJHQxNzc0ODU3NDk0JGo0MCRsMCRoMA.."
+            target="_blank"
+          >
+            <PrimaryButton>{t("common.callMeBack")}</PrimaryButton>
+          </Link>
         </div>
 
         <div className="flex flex-col gap-6 lg:flex-row">
-          <Link href="https://shop.du.ae/en/personal/s-du-postpaid-plans?planType=esaad&minutes=flexible&banner=duEsaadPlansLandingSpotlightComponent" target="_blank" className="flex flex-1 items-center justify-center overflow-hidden rounded-xl bg-[#245745]">
-            <Image
-              src="/images/esaad.png"
-              alt="du phone"
-              width={600}
-              height={400}
-            />
+          {/* Esaad */}
+          <Link
+            href="https://shop.du.ae/en/personal/s-du-postpaid-plans?planType=esaad&minutes=flexible&banner=duEsaadPlansLandingSpotlightComponent"
+            target="_blank"
+            className="flex flex-1 flex-col overflow-hidden rounded-xl bg-[#245744] sm:flex-row"
+          >
+            <div className="flex flex-[2] items-center justify-center p-4">
+              <Image
+                src="/images/esaad.png"
+                alt="esaad"
+                width={300}
+                height={300}
+              />
+            </div>
+            <div className="flex flex-[3] flex-col items-start justify-center gap-4 p-6 sm:p-10">
+              <p className="typo-body-lg font-medium text-white">
+                {t("offers.esaadLabel")}
+              </p>
+              <h2 className="typo-display-lg text-white">
+                {t("offers.esaadTitle")}
+              </h2>
+              <p className="typo-body-lg text-white/80">
+                {t("offers.esaadDesc")}
+              </p>
+              <span className="mt-2 rounded-lg bg-white px-12 py-6 text-lg font-bold text-primary">
+                {t("offers.esaadCta")}
+              </span>
+            </div>
           </Link>
-          <Link href="https://shop.du.ae/en/personal/s-du-postpaid-plans?planType=fazaaplans&minutes=national&banner=duFazaaPlansLandingSpotlightComponent" target="_blank" className="flex flex-1 items-center justify-center overflow-hidden rounded-xl bg-[#CBA54A]">
-            <Image
-              src="/images/fazaa.png"
-              alt="du phone"
-              width={600}
-              height={400}
-            />
+
+          {/* Fazaa */}
+          <Link
+            href="https://shop.du.ae/en/personal/s-du-postpaid-plans?planType=fazaaplans&minutes=national&banner=duFazaaPlansLandingSpotlightComponent"
+            target="_blank"
+            className="flex flex-1 flex-col overflow-hidden rounded-xl bg-[#CCA64B] sm:flex-row"
+          >
+            <div className="flex flex-[2] items-center justify-center p-4">
+              <Image
+                src="/images/fazaa.png"
+                alt="fazaa"
+                width={300}
+                height={300}
+              />
+            </div>
+            <div className="flex flex-[3] flex-col items-start justify-center gap-4 p-6 sm:p-10">
+              <p className="typo-body-lg font-medium text-white">
+                {t("offers.fazaaLabel")}
+              </p>
+              <h2 className="typo-display-lg text-white">
+                {t("offers.fazaaTitle")}
+              </h2>
+              <p className="typo-body-lg text-white/80">
+                {t("offers.fazaaDesc")}
+              </p>
+              <span className="mt-2 rounded-lg bg-white px-12 py-6 text-lg font-bold text-primary">
+                {t("offers.fazaaCta")}
+              </span>
+            </div>
           </Link>
         </div>
 
@@ -247,17 +372,14 @@ export default function Page() {
             />
           </div>
 
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center lg:items-start lg:text-left">
+          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center lg:items-start lg:text-start">
             <div className="flex gap-2">
               <BriefcaseBusiness />
-              <p>Setup within 24 hours</p>
+              <p>{t("homeInternet.setupWithin24h")}</p>
             </div>
-            <h1 className="typo-body-xl">
-              Up to 45% off home
-              <br /> internet and TV plans
-            </h1>
+            <h1 className="typo-body-xl">{t("homeInternet.title")}</h1>
             <PrimaryButton className="bg-primary px-4 py-2 text-white">
-              Find my plan
+              {t("homeInternet.findMyPlan")}
             </PrimaryButton>
           </div>
         </div>
@@ -267,27 +389,24 @@ export default function Page() {
         <Cards wid="full">
           <div className="p-6 lg:p-10">
             <div className="flex flex-col-reverse lg:flex-row">
-              <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center lg:items-start lg:p-10 lg:text-left">
+              <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center lg:items-start lg:p-10 lg:text-start">
                 <div className="flex flex-wrap justify-center gap-6 lg:justify-start lg:gap-10">
                   <div className="flex gap-2">
                     <Van />
-                    <p>Free delivery</p>
+                    <p>{t("samsung.freeDelivery")}</p>
                   </div>
                   <div className="flex gap-2">
                     <CardSim />
-                    <p>Free delivery</p>
+                    <p>{t("samsung.freeDelivery")}</p>
                   </div>
                 </div>
-                <h1 className="typo-body-xl">
-                  Unfold your story with
-                  <br /> Galaxy AI.
-                </h1>
+                <h1 className="typo-body-xl">{t("samsung.title")}</h1>
                 <p className="typo-body-lg font-medium">
-                  Starting AED 143/month.
+                  {t("common.startingPrice", { price: "143" })}
                 </p>
                 <Link href="https://www.du.ae/Samsung" target="_blank">
                   <PrimaryButton className="bg-primary px-4 py-2 text-white">
-                    Buy now
+                    {t("common.buyNow")}
                   </PrimaryButton>
                 </Link>
               </div>
@@ -316,13 +435,13 @@ export default function Page() {
                   height={400}
                 />
               </div>
-              <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center sm:items-start sm:text-left lg:p-10">
-                <h1 className="typo-body-xl">du Home Wireless</h1>
+              <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center sm:items-start sm:text-start lg:p-10">
+                <h1 className="typo-body-xl">{t("packages.homeWireless")}</h1>
                 <p className="typo-body-lg font-medium">
-                  Starting AED 143/month.
+                  {t("common.startingPrice", { price: "143" })}
                 </p>
                 <PrimaryButton className="bg-primary px-4 py-2 text-white">
-                  Buy now
+                  {t("common.buyNow")}
                 </PrimaryButton>
               </div>
             </div>
@@ -337,13 +456,13 @@ export default function Page() {
                 height={400}
               />
             </div>
-            <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center sm:items-start sm:text-left lg:p-10">
-              <h1 className="typo-body-xl">TV packages</h1>
+            <div className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center sm:items-start sm:text-start lg:p-10">
+              <h1 className="typo-body-xl">{t("packages.tvPackages")}</h1>
               <p className="typo-body-lg font-medium">
-                Starting AED 143/month.
+                {t("packages.startingPrice")}
               </p>
               <PrimaryButton className="bg-primary px-4 py-2 text-white">
-                Buy now
+                {t("common.buyNow")}
               </PrimaryButton>
             </div>
           </Cards>
@@ -361,14 +480,15 @@ export default function Page() {
               className="w-full"
             />
           </div>
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center lg:items-start lg:text-left">
-            <h1 className="typo-body-xl">Get 50GB free and save 50%.</h1>
-            <p className="typo-body-lg font-medium">
-              On Prepaid Flexi this Ramadan.
-            </p>
-            <Link href="https://shop.du.ae/en/personal/s-du-prepaid-flexi-plans" target="_blank">
+          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center lg:items-start lg:text-start">
+            <h1 className="typo-body-xl">{t("flexi.title")}</h1>
+            <p className="typo-body-lg font-medium">{t("flexi.subtitle")}</p>
+            <Link
+              href="https://shop.du.ae/en/personal/s-du-prepaid-flexi-plans"
+              target="_blank"
+            >
               <PrimaryButton className="bg-primary px-4 py-2 text-white">
-                Explore flexi plans
+                {t("flexi.cta")}
               </PrimaryButton>
             </Link>
           </div>
@@ -377,15 +497,13 @@ export default function Page() {
         {/* App and testimonials */}
 
         <div className="relative mb-32 h-fit pb-16 sm:mb-16">
-          <div className="min-h-[300px] w-full overflow-hidden rounded-xl bg-[url(/images/du-App-Advert.jpg)] bg-cover bg-no-repeat lg:h-[546px]">
+          <div
+            className="min-h-[300px] w-full overflow-hidden rounded-xl bg-cover bg-no-repeat lg:h-[546px]"
+            style={{ backgroundImage: `url(/images/du-App-Advert${locale === "ar" ? "-ar" : ""}.jpg)` }}
+          >
             <div className="flex flex-col gap-4 p-4 sm:max-w-2/3 sm:gap-6 sm:p-6 lg:max-w-1/2 lg:gap-10 lg:p-20">
-              <h1 className="typo-body-xl text-white">
-                Everything you need in the du App.
-              </h1>
-              <p className="text-white">
-                Manage services, pay your bills, track usage and renew your ID,
-                all in one place.
-              </p>
+              <h1 className="typo-body-xl text-white">{t("app.title")}</h1>
+              <p className="text-white">{t("app.description")}</p>
               <div className="flex flex-wrap gap-3 lg:gap-6">
                 <Image
                   src="/images/appstore.png"
@@ -410,46 +528,14 @@ export default function Page() {
           </div>
           <div className="absolute -bottom-30 left-1/2 h-fit -translate-x-1/2 sm:-bottom-10">
             <CardSlider>
-              <ReviewCard
-                title="So good so far"
-                rating={5}
-                review="du's commitment towards its customers is always amazing and keeps going."
-              />
-              <ReviewCard
-                title="Easy and fast"
-                rating={5}
-                review="du app recharge for friends it's easy and fast."
-              />
-              <ReviewCard
-                title="Saves time and energy"
-                rating={5}
-                review="Impressive, each time I got nice offers and recharged my credit on time from anywhere."
-              />
-              <ReviewCard
-                title="Easy to use"
-                rating={5}
-                review="Recommended all over the world with great experience and quality."
-              />
-              <ReviewCard
-                title="Safe and secure"
-                rating={4}
-                review="Easy to use and safe and secure payment methods overall the application is good."
-              />
-              <ReviewCard
-                title="Great service"
-                rating={5}
-                review="Very helpful app, everything is just a click away. Highly recommend it."
-              />
-              <ReviewCard
-                title="Convenient"
-                rating={5}
-                review="Makes managing my account so simple. Love the interface and speed."
-              />
-              <ReviewCard
-                title="Love it"
-                rating={5}
-                review="Best telecom app I have ever used. Keep up the good work du!"
-              />
+              <ReviewCard title={t("reviews.r1Title")} rating={5} review={t("reviews.r1Review")} />
+              <ReviewCard title={t("reviews.r2Title")} rating={5} review={t("reviews.r2Review")} />
+              <ReviewCard title={t("reviews.r3Title")} rating={5} review={t("reviews.r3Review")} />
+              <ReviewCard title={t("reviews.r4Title")} rating={5} review={t("reviews.r4Review")} />
+              <ReviewCard title={t("reviews.r5Title")} rating={4} review={t("reviews.r5Review")} />
+              <ReviewCard title={t("reviews.r6Title")} rating={5} review={t("reviews.r6Review")} />
+              <ReviewCard title={t("reviews.r7Title")} rating={5} review={t("reviews.r7Review")} />
+              <ReviewCard title={t("reviews.r8Title")} rating={5} review={t("reviews.r8Review")} />
             </CardSlider>
           </div>
         </div>
@@ -461,7 +547,7 @@ export default function Page() {
             <div className="flex flex-col sm:flex-row">
               <div className="flex flex-1 items-center justify-center">
                 <Image
-                  src="/images/EID.png"
+                  src={`/images/EID${locale === "ar" ? "-ar" : ""}.png`}
                   alt="du phone"
                   width={256}
                   height={400}
@@ -469,11 +555,11 @@ export default function Page() {
                 />
               </div>
               <div className="flex flex-1 flex-col justify-center gap-2 p-6 sm:gap-4 sm:p-10">
-                <h1 className="typo-body-xl">Renew your Emirates ID</h1>
-                <p className="typo-body-lg font-medium">
-                  Keep your ID up to date.
-                </p>
-                <SecondaryButton variant="white">Renew ID</SecondaryButton>
+                <h1 className="typo-body-xl">{t("eid.title")}</h1>
+                <p className="typo-body-lg font-medium">{t("eid.subtitle")}</p>
+                <SecondaryButton variant="white">
+                  {t("eid.cta")}
+                </SecondaryButton>
               </div>
             </div>
           </div>
@@ -481,7 +567,7 @@ export default function Page() {
             <div className="flex flex-col sm:flex-row">
               <div className="flex flex-1 items-center justify-center">
                 <Image
-                  src="/images/du-Corporate-Cyber.png"
+                  src={`/images/du-Corporate-Cyber${locale === "ar" ? "-ar" : ""}.png`}
                   alt="du phone"
                   width={256}
                   height={400}
@@ -489,11 +575,13 @@ export default function Page() {
                 />
               </div>
               <div className="flex flex-1 flex-col justify-center gap-2 p-6 sm:gap-4 sm:p-10">
-                <h1 className="typo-body-xl">Stay Cyber Safe</h1>
+                <h1 className="typo-body-xl">{t("cyber.title")}</h1>
                 <p className="typo-body-lg font-medium">
-                  Stay safe online by following our cyber-safety practices.
+                  {t("cyber.subtitle")}
                 </p>
-                <SecondaryButton variant="white">Learn more</SecondaryButton>
+                <SecondaryButton variant="white">
+                  {t("common.learnMore")}
+                </SecondaryButton>
               </div>
             </div>
           </div>
@@ -501,23 +589,32 @@ export default function Page() {
 
         {/* Help */}
         <div>
-          <h2 className="typo-heading-xl mb-6">Need help?</h2>
+          <h2 className="typo-heading-xl mb-6">{t("needHelp.title")}</h2>
           <HelpTabs
             categories={[
               {
                 icon: <Phone size={28} />,
-                label: "Roaming",
+                label: t("needHelp.roaming"),
                 links: [
-                  { label: "Activate roaming", href: "https://www.du.ae/personal/mobile/roaming" },
-                  { label: "Check roaming rates", href: "https://www.du.ae/personal/mobile/roaming" },
-                  { label: "Roaming packs", href: "https://www.du.ae/personal/mobile/roaming" },
+                  {
+                    label: "Activate roaming",
+                    href: "https://www.du.ae/personal/mobile/roaming",
+                  },
+                  {
+                    label: "Check roaming rates",
+                    href: "https://www.du.ae/personal/mobile/roaming",
+                  },
+                  {
+                    label: "Roaming packs",
+                    href: "https://www.du.ae/personal/mobile/roaming",
+                  },
                 ],
                 seeAllLabel: "See all Roaming FAQs",
                 seeAllHref: "#",
               },
               {
                 icon: <ShoppingCart size={28} />,
-                label: "Shopping online",
+                label: t("needHelp.shoppingOnline"),
                 links: [
                   { label: "Track my online order", href: "#" },
                   { label: "Change my delivery location", href: "#" },
@@ -528,7 +625,7 @@ export default function Page() {
               },
               {
                 icon: <Smartphone size={28} />,
-                label: "Postpaid Mobile",
+                label: t("needHelp.postpaidMobile"),
                 links: [
                   { label: "Check my balance", href: "#" },
                   { label: "Upgrade my plan", href: "#" },
@@ -539,7 +636,7 @@ export default function Page() {
               },
               {
                 icon: <CreditCard size={28} />,
-                label: "Prepaid Mobile",
+                label: t("needHelp.prepaidMobile"),
                 links: [
                   { label: "Recharge my line", href: "#" },
                   { label: "Check my balance", href: "#" },
@@ -550,7 +647,7 @@ export default function Page() {
               },
               {
                 icon: <Receipt size={28} />,
-                label: "Billing",
+                label: t("needHelp.billing"),
                 links: [
                   { label: "View my bill", href: "#" },
                   { label: "Pay my bill", href: "#" },
@@ -561,7 +658,7 @@ export default function Page() {
               },
               {
                 icon: <Globe size={28} />,
-                label: "Online Services",
+                label: t("needHelp.onlineServices"),
                 links: [
                   { label: "Manage my account", href: "#" },
                   { label: "Reset my password", href: "#" },
@@ -572,7 +669,7 @@ export default function Page() {
               },
               {
                 icon: <Wifi size={28} />,
-                label: "Home Internet",
+                label: t("needHelp.homeInternet"),
                 links: [
                   { label: "Check my speed", href: "#" },
                   { label: "Troubleshoot my connection", href: "#" },
@@ -583,7 +680,7 @@ export default function Page() {
               },
               {
                 icon: <Tv size={28} />,
-                label: "TV",
+                label: t("needHelp.tv"),
                 links: [
                   { label: "Browse TV packages", href: "#" },
                   { label: "Manage my channels", href: "#" },
@@ -594,7 +691,7 @@ export default function Page() {
               },
               {
                 icon: <Wallet size={28} />,
-                label: "du Pay",
+                label: t("needHelp.duPay"),
                 links: [
                   { label: "Set up du Pay", href: "#" },
                   { label: "Transfer money", href: "#" },
@@ -605,7 +702,7 @@ export default function Page() {
               },
               {
                 icon: <Building2 size={28} />,
-                label: "Business",
+                label: t("needHelp.businessLabel"),
                 links: [
                   { label: "Business plans", href: "#" },
                   { label: "Corporate solutions", href: "#" },
@@ -616,7 +713,7 @@ export default function Page() {
               },
               {
                 icon: <Shield size={28} />,
-                label: "Security",
+                label: t("needHelp.security"),
                 links: [
                   { label: "Report fraud", href: "#" },
                   { label: "Secure my account", href: "#" },
@@ -627,7 +724,7 @@ export default function Page() {
               },
               {
                 icon: <Headset size={28} />,
-                label: "Contact us",
+                label: t("needHelp.contactUs"),
                 links: [
                   { label: "Call customer care", href: "#" },
                   { label: "Visit a store", href: "#" },
@@ -643,33 +740,36 @@ export default function Page() {
         {/* Help page */}
         <div className="flex flex-col gap-6 sm:flex-row">
           <div className="flex flex-1 flex-col gap-4 rounded-xl border border-border p-4">
-            <h5 className="typo-body-lg font-bold">Online self-services</h5>
+            <h5 className="typo-body-lg font-bold">
+              {t("helpPage.onlineSelfServices")}
+            </h5>
             <p className="typo-body-sm">
-              Experiencing longer than normal wait-times in our call centres?
-              Access our services online.
+              {t("helpPage.onlineSelfServicesDesc")}
             </p>
             <SecondaryButton variant="outline" size="sm">
-              Online self-services
+              {t("helpPage.onlineSelfServices")}
             </SecondaryButton>
           </div>
           <div className="flex flex-1 flex-col gap-4 rounded-xl border border-border p-4">
-            <h5 className="typo-body-lg font-bold">Online self-services</h5>
+            <h5 className="typo-body-lg font-bold">
+              {t("helpPage.onlineSelfServices")}
+            </h5>
             <p className="typo-body-sm">
-              Experiencing longer than normal wait-times in our call centres?
-              Access our services online.
+              {t("helpPage.onlineSelfServicesDesc")}
             </p>
             <SecondaryButton variant="outline" size="sm">
-              Online self-services
+              {t("helpPage.onlineSelfServices")}
             </SecondaryButton>
           </div>
           <div className="flex flex-1 flex-col gap-4 rounded-xl border border-border p-4">
-            <h5 className="typo-body-lg font-bold">Online self-services</h5>
+            <h5 className="typo-body-lg font-bold">
+              {t("helpPage.onlineSelfServices")}
+            </h5>
             <p className="typo-body-sm">
-              Experiencing longer than normal wait-times in our call centres?
-              Access our services online.
+              {t("helpPage.onlineSelfServicesDesc")}
             </p>
             <SecondaryButton variant="outline" size="sm">
-              Online self-services
+              {t("helpPage.onlineSelfServices")}
             </SecondaryButton>
           </div>
         </div>

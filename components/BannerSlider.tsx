@@ -4,68 +4,76 @@ import { useState, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import PrimaryButton from "./PrimaryButton"
+import { useTranslations, useLocale } from "next-intl"
 
 interface BannerSlide {
   src: string
+  srcAr: string
   alt: string
-  title: string
-  subtitle?: string
-  buttonText: string
+  titleKey: string
+  subtitleKey?: string
+  buttonTextKey: string
   buttonLink?: string
-  tabLabel: string
-  tabDescription?: string
+  tabLabelKey: string
+  tabDescKey?: string
   invert?: string
 }
 
 const bannerSlides: BannerSlide[] = [
   {
     src: "/images/banner/Mobile.jpg",
-    alt: "Own The World’s First Built-in Privacy Display On Mobile. ",
-    title: "Own The World’s First Built-in Privacy Display On Mobile. ",
-    subtitle:
-      "From AED 129/month, plus 500GB data and premium subscriptions on us. ",
-    buttonText: "Buy online",
+    srcAr: "/images/banner/Mobile-ar.png",
+    alt: "Galaxy S26 Series",
+    titleKey: "slide1Title",
+    subtitleKey: "slide1Subtitle",
+    buttonTextKey: "buyOnline",
     buttonLink:
       "https://www.du.ae/samsung?_gl=1*1sx8g8x*_gcl_au*NTM5NDk4NjY4LjE3NzMwNDAxMDU.*_ga*ODExNjg0OTg3LjE3NDcwNDc1OTM.*_ga_PSF2QWHVDC*czE3NzQ4NTA2OTckbzUyJGcxJHQxNzc0ODUwNzE1JGo0MiRsMCRoMA..",
-    tabLabel: "Galaxy S26 Series",
-    tabDescription: "From AED 129/month.",
+    tabLabelKey: "tab1Label",
+    tabDescKey: "tab1Desc",
     invert: "invert",
   },
   {
     src: "/images/banner/du-Consumer-50.jpg",
-    alt: "Get up to 50% off on Power Plans.",
-    title: "Get up to 50% off on Power Plans.",
-    subtitle: "For 6 months.",
-    buttonText: "Buy online",
+    srcAr: "/images/banner/du-Consumer-50-ar.jpg",
+    alt: "50% off Power Plans",
+    titleKey: "slide2Title",
+    subtitleKey: "slide2Subtitle",
+    buttonTextKey: "buyOnline",
     buttonLink:
-      "https://shop.du.ae/en/personal/s-du-postpaid-plans?contract=medium&minutes=flexible&planType=all&view=splash&_gl=1*1ftzmv3*_gcl_au*NTM5NDk4NjY4LjE3NzMwNDAxMDU.*_ga*ODExNjg0OTg3LjE3NDcwNDc1OTM.*_ga_PSF2QWHVDC*czE3NzQ4NTA2OTckbzUyJGcxJHQxNzc0ODUxMTc4JGo1NCRsMCRoMA..",
-    tabLabel: "50% off Power Plans",
-    tabDescription: "For 6 months.",
+      "https://shop.du.ae/en/personal/s-du-postpaid-plans?contract=medium&minutes=flexible&planType=all&view=splash",
+    tabLabelKey: "tab2Label",
+    tabDescKey: "tab2Desc",
   },
   {
     src: "/images/banner/du-Fazaa.jpg",
-    alt: "Fazaa for all. With our exclusive plans.",
-    title: "Fazaa for all. With our exclusive plans.",
-    buttonText: "Buy online",
+    srcAr: "/images/banner/du-Fazaa-ar.jpg",
+    alt: "Fazaa for all",
+    titleKey: "slide3Title",
+    buttonTextKey: "buyOnline",
     buttonLink:
-      "https://shop.du.ae/en/personal/s-du-postpaid-plans?planType=fazaaplans&minutes=national&_gl=1*mbbbu5*_gcl_au*NTM5NDk4NjY4LjE3NzMwNDAxMDU.*_ga*ODExNjg0OTg3LjE3NDcwNDc1OTM.*_ga_PSF2QWHVDC*czE3NzQ4NTA2OTckbzUyJGcxJHQxNzc0ODUxNzg2JGo1OSRsMCRoMA..",
-    tabLabel: "Fazaa for all.",
-    tabDescription: "With our exclusive plans.",
+      "https://shop.du.ae/en/personal/s-du-postpaid-plans?planType=fazaaplans&minutes=national",
+    tabLabelKey: "tab3Label",
+    tabDescKey: "tab3Desc",
   },
   {
     src: "/images/banner/HWE-duae.jpg",
-    alt: "Get du Home Wireless Plus for AED 229/month.",
-    title: "Get du Home Wireless Plus for AED 229/month.",
-    subtitle: "",
-    buttonText: "Buy online",
+    srcAr: "/images/banner/HWE-duae-ar.jpg",
+    alt: "du Home Wireless",
+    titleKey: "slide4Title",
+    subtitleKey: "",
+    buttonTextKey: "buyOnline",
     buttonLink:
       "https://www.du.ae/homewireless?utm_source=homepage&utm_medium=banner&utm_campaign=homewireless_hp",
-    tabLabel: "du Home Wireless Plans",
-    tabDescription: "Unlimited data at home.",
+    tabLabelKey: "tab4Label",
+    tabDescKey: "tab4Desc",
   },
 ]
 
 const BannerSlider = () => {
+  const t = useTranslations("banner")
+  const tc = useTranslations("common")
+  const locale = useLocale()
   const [current, setCurrent] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
 
@@ -84,7 +92,7 @@ const BannerSlider = () => {
       {/* Slides */}
       <div
         className="flex transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateX(-${current * 100}%)` }}
+        style={{ transform: `translateX(${locale === "ar" ? "" : "-"}${current * 100}%)` }}
       >
         {bannerSlides.map((slide, index) => (
           <div
@@ -92,7 +100,7 @@ const BannerSlider = () => {
             className="relative aspect-[3/4] w-full shrink-0 sm:aspect-[1920/540]"
           >
             <Image
-              src={slide.src}
+              src={locale === "ar" ? slide.srcAr : slide.src}
               alt={slide.alt}
               fill
               className="object-cover"
@@ -105,11 +113,11 @@ const BannerSlider = () => {
                   <h2
                     className={`typo-display-md whitespace-pre-line text-white ${slide.invert}`}
                   >
-                    {slide.title}
+                    {t(slide.titleKey)}
                   </h2>
-                  {slide.subtitle && (
+                  {slide.subtitleKey && t(slide.subtitleKey) && (
                     <p className={`mt-2 text-lg text-white/90 ${slide.invert}`}>
-                      {slide.subtitle}
+                      {t(slide.subtitleKey)}
                     </p>
                   )}
                   <div className="mt-6">
@@ -119,10 +127,10 @@ const BannerSlider = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <PrimaryButton>{slide.buttonText}</PrimaryButton>
+                        <PrimaryButton>{tc(slide.buttonTextKey)}</PrimaryButton>
                       </Link>
                     ) : (
-                      <PrimaryButton>{slide.buttonText}</PrimaryButton>
+                      <PrimaryButton>{tc(slide.buttonTextKey)}</PrimaryButton>
                     )}
                   </div>
                 </div>
@@ -147,11 +155,11 @@ const BannerSlider = () => {
                 }`}
               >
                 <p className="text-forground truncate text-sm font-semibold">
-                  {slide.tabLabel}
+                  {t(slide.tabLabelKey)}
                 </p>
-                {slide.tabDescription && (
+                {slide.tabDescKey && (
                   <p className="mt-0.5 truncate text-xs text-grey-70">
-                    {slide.tabDescription}
+                    {t(slide.tabDescKey)}
                   </p>
                 )}
                 {current === index && (

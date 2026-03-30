@@ -1,6 +1,7 @@
 "use client"
 
 import { useRef, useState, useEffect, useCallback } from "react"
+import { useLocale } from "next-intl"
 
 interface CardSliderProps {
   children: React.ReactNode
@@ -11,6 +12,8 @@ const CardSlider = ({ children, visibleCount = 5 }: CardSliderProps) => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
   const [totalPages, setTotalPages] = useState(1)
+  const locale = useLocale()
+  const isRtl = locale === "ar"
 
   const updatePages = useCallback(() => {
     const el = scrollRef.current
@@ -28,8 +31,12 @@ const CardSlider = ({ children, visibleCount = 5 }: CardSliderProps) => {
     if (!el || !el.children[0]) return
     const cardWidth = (el.children[0] as HTMLElement).offsetWidth
     const gap = 16
-    const scrollLeft = page * visibleCount * (cardWidth + gap)
-    el.scrollTo({ left: scrollLeft, behavior: "smooth" })
+    const scrollAmount = page * visibleCount * (cardWidth + gap)
+    if (isRtl) {
+      el.scrollTo({ left: -scrollAmount, behavior: "smooth" })
+    } else {
+      el.scrollTo({ left: scrollAmount, behavior: "smooth" })
+    }
     setActiveIndex(page)
   }
 
@@ -38,7 +45,8 @@ const CardSlider = ({ children, visibleCount = 5 }: CardSliderProps) => {
     if (!el || !el.children[0]) return
     const cardWidth = (el.children[0] as HTMLElement).offsetWidth
     const gap = 16
-    const page = Math.round(el.scrollLeft / (visibleCount * (cardWidth + gap)))
+    const scrollPos = Math.abs(el.scrollLeft)
+    const page = Math.round(scrollPos / (visibleCount * (cardWidth + gap)))
     setActiveIndex(page)
   }
 
@@ -47,7 +55,8 @@ const CardSlider = ({ children, visibleCount = 5 }: CardSliderProps) => {
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="scrollbar-hide flex w-screen gap-6 overflow-x-auto scroll-smooth pb-4 pl-[max(1rem,calc((100vw-1280px)/2+2rem))]"
+        className="scrollbar-hide flex w-screen gap-6 overflow-x-auto scroll-smooth pb-4 ps-[max(1rem,calc((100vw-1280px)/2+2rem))]"
+        dir={isRtl ? "rtl" : "ltr"}
       >
         {children}
         {/* Spacer to allow last card to scroll into view */}
