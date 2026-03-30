@@ -1,27 +1,48 @@
 {
   "project": "du-web",
-  "version": "0.0.1",
-  "phase": "setup",
-  "current_task": "Project initialized. Waiting for design system from user to begin theming. Figma MCP will be connected for component development.",
+  "version": "0.1.0",
+  "phase": "i18n-complete",
+  "current_task": "Arabic/English i18n fully implemented. All page text, navbar, banner, footer, mega menu translated. RTL layout supported.",
   "last_change": {
-    "date": "2026-03-09",
-    "summary": "Project scaffolded with Next.js 16, React 19, Tailwind CSS 4, shadcn/ui. Docs rewritten for du.ae replica project.",
-    "areas": ["docs", "setup"]
+    "date": "2026-03-30",
+    "summary": "Full i18n with next-intl (en/ar), mega menu dropdowns, banner slider, offer cards with overlaid text, locale-aware images, RTL support.",
+    "areas": ["i18n", "nav", "banner", "offers", "footer", "components"]
   },
   "completed": [
     "Project scaffold (Next.js 16.1.6, Tailwind CSS 4, shadcn/ui, TypeScript)",
-    "Docs rewritten for du.ae website replica"
+    "Docs rewritten for du.ae website replica",
+    "Design system: typography scale, color tokens, du_primary font",
+    "TopBar with Personal/Business tabs, search, language switcher",
+    "NavBar with mega menu dropdowns (5 menus with full content)",
+    "NavBar color inversion on dropdown active",
+    "Click outside to close dropdown",
+    "Banner slider with auto-rotate, progress bar, tab navigation",
+    "Banner links to external du.ae pages",
+    "Product cards with links to shop.du.ae",
+    "Offer cards with overlaid translatable text and gradient buttons",
+    "Esaad/Fazaa cards with 2-column layout and translatable text",
+    "Footer with real links (shop, social, app stores)",
+    "i18n: next-intl setup with en/ar locales",
+    "i18n: [locale] route segment with RTL support for Arabic",
+    "i18n: All page text translated (banner, shop, offers, packages, flexi, app, EID, cyber, help, footer)",
+    "i18n: Mega menu items and section titles translated",
+    "i18n: Locale-aware images (banner, app advert, EID, cyber safety)",
+    "i18n: CardSlider RTL scroll support",
+    "i18n: Language switcher in TopBar and mobile menu",
+    "i18n: Logical CSS properties (text-start) for RTL alignment"
   ],
-  "next": "Receive design system from user, apply theming, then build components from Figma",
+  "next": "Polish RTL layout, remaining image swaps for Arabic, deploy to Vercel",
   "roadmap": [
-    "Phase 1: Design System & Theming (colors, typography, spacing from du.ae)",
-    "Phase 2: Core Components (header, nav, footer, cards, buttons)",
-    "Phase 3: Page Layouts (home, plans, devices, etc.)",
-    "Phase 4: Responsiveness & Polish"
+    "Phase 1: Design System & Theming — DONE",
+    "Phase 2: Core Components — DONE",
+    "Phase 3: Page Layout (home) — DONE",
+    "Phase 4: i18n (en/ar) — DONE",
+    "Phase 5: Responsiveness & Polish",
+    "Phase 6: Additional pages (plans, devices, etc.)"
   ],
   "notes": {
-    "figma": "Will be connected via Figma MCP for pixel-accurate component development",
-    "design_system": "Awaiting design system details from user before starting theming",
+    "i18n": "next-intl with messages/en.json and messages/ar.json. Middleware handles locale routing.",
+    "images": "Arabic image variants use -ar suffix (e.g. Mobile-ar.png, EID-ar.png)",
     "reference": "du.ae - UAE telecom website"
   }
 }
