@@ -308,8 +308,8 @@ export default function Page() {
               <Image
                 src="/images/esaad.png"
                 alt="esaad"
-                width={300}
-                height={300}
+                width={200}
+                height={200}
               />
             </div>
             <div className="flex flex-[3] flex-col items-start justify-center gap-4 p-6 sm:p-10">
@@ -338,8 +338,8 @@ export default function Page() {
               <Image
                 src="/images/fazaa.png"
                 alt="fazaa"
-                width={300}
-                height={300}
+                width={200}
+                height={200}
               />
             </div>
             <div className="flex flex-[3] flex-col items-start justify-center gap-4 p-6 sm:p-10">
@@ -499,7 +499,9 @@ export default function Page() {
         <div className="relative mb-32 h-fit pb-16 sm:mb-16">
           <div
             className="min-h-[300px] w-full overflow-hidden rounded-xl bg-cover bg-no-repeat lg:h-[546px]"
-            style={{ backgroundImage: `url(/images/du-App-Advert${locale === "ar" ? "-ar" : ""}.jpg)` }}
+            style={{
+              backgroundImage: `url(/images/du-App-Advert${locale === "ar" ? "-ar" : ""}.jpg)`,
+            }}
           >
             <div className="flex flex-col gap-4 p-4 sm:max-w-2/3 sm:gap-6 sm:p-6 lg:max-w-1/2 lg:gap-10 lg:p-20">
               <h1 className="typo-body-xl text-white">{t("app.title")}</h1>
@@ -528,14 +530,46 @@ export default function Page() {
           </div>
           <div className="absolute -bottom-30 left-1/2 h-fit -translate-x-1/2 sm:-bottom-10">
             <CardSlider>
-              <ReviewCard title={t("reviews.r1Title")} rating={5} review={t("reviews.r1Review")} />
-              <ReviewCard title={t("reviews.r2Title")} rating={5} review={t("reviews.r2Review")} />
-              <ReviewCard title={t("reviews.r3Title")} rating={5} review={t("reviews.r3Review")} />
-              <ReviewCard title={t("reviews.r4Title")} rating={5} review={t("reviews.r4Review")} />
-              <ReviewCard title={t("reviews.r5Title")} rating={4} review={t("reviews.r5Review")} />
-              <ReviewCard title={t("reviews.r6Title")} rating={5} review={t("reviews.r6Review")} />
-              <ReviewCard title={t("reviews.r7Title")} rating={5} review={t("reviews.r7Review")} />
-              <ReviewCard title={t("reviews.r8Title")} rating={5} review={t("reviews.r8Review")} />
+              <ReviewCard
+                title={t("reviews.r1Title")}
+                rating={5}
+                review={t("reviews.r1Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r2Title")}
+                rating={5}
+                review={t("reviews.r2Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r3Title")}
+                rating={5}
+                review={t("reviews.r3Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r4Title")}
+                rating={5}
+                review={t("reviews.r4Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r5Title")}
+                rating={4}
+                review={t("reviews.r5Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r6Title")}
+                rating={5}
+                review={t("reviews.r6Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r7Title")}
+                rating={5}
+                review={t("reviews.r7Review")}
+              />
+              <ReviewCard
+                title={t("reviews.r8Title")}
+                rating={5}
+                review={t("reviews.r8Review")}
+              />
             </CardSlider>
           </div>
         </div>
