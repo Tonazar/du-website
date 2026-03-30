@@ -1,7 +1,9 @@
 import React from "react"
 
-interface CardsProps {
+export interface CardsProps {
   children: React.ReactNode
+  wid?: string
+  classes?: string
 }
 const Cards = ({ children, wid = "fit", classes }: CardsProps) => {
   return (
